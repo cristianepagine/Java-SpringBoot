@@ -1,13 +1,25 @@
 package com.cristiane.helpdesk.domain;
 
+import com.cristiane.helpdesk.domain.enums.Perfil;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+
 public class Cliente extends Pessoa {
-private List<Chamado> chamados = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente(Integer id, String nome, String CPF, String email, String senha) {
         super(id, nome, CPF, email, senha);
+        addPerfil(Perfil.CLIENTE);
+    }
+
+    public Cliente() {
+        addPerfil(Perfil.CLIENTE);
     }
 
     public List<Chamado> getChamados() {
