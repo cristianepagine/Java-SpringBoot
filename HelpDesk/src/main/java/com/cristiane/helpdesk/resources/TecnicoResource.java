@@ -1,6 +1,7 @@
 package com.cristiane.helpdesk.resources;
 
 import com.cristiane.helpdesk.domain.Tecnico;
+import com.cristiane.helpdesk.domain.dtos.TecnicoDTO;
 import com.cristiane.helpdesk.services.TecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/tecnicos")
-public class TecnicoResource {
+public class  TecnicoResource {
 
     @Autowired
     private TecnicoService tecnicoService;
@@ -19,8 +20,8 @@ public class TecnicoResource {
 
     @GetMapping(value = "/{id}")
     //response entity representa toda resposta http
-    public ResponseEntity<Tecnico> findById(@PathVariable Integer id) {
-        Tecnico obj = this.tecnicoService.findById(id);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
+        Tecnico obj = tecnicoService.findById(id);
+        return ResponseEntity.ok().body(new TecnicoDTO(obj));
     }
 }
