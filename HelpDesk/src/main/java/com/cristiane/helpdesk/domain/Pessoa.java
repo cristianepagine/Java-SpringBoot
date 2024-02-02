@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 
 @Entity
 public abstract class Pessoa implements Serializable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
     protected String nome;
-    @Column(unique = true)
-    protected String CPF;
+    @Column(unique = true, nullable = false)
+    protected String cpf;
     protected String email;
     protected String senha;
     @ElementCollection(fetch = FetchType.EAGER)
@@ -32,10 +32,10 @@ public abstract class Pessoa implements Serializable {
         addPerfil(Perfil.CLIENTE);
     }
 
-    public Pessoa(Integer id, String nome, String CPF, String email, String senha) {
+    public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
         this.id = id;
         this.nome = nome;
-        this.CPF = CPF;
+        this.cpf = cpf;
         this.email = email;
         this.senha = senha;
         addPerfil(Perfil.CLIENTE);
@@ -58,11 +58,11 @@ public abstract class Pessoa implements Serializable {
     }
 
     public String getCPF() {
-        return CPF;
+        return cpf;
     }
 
     public void setCPF(String CPF) {
-        this.CPF = CPF;
+        this.cpf = cpf;
     }
 
     public String getEmail() {
@@ -102,11 +102,14 @@ public abstract class Pessoa implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pessoa pessoa = (Pessoa) o;
-        return Objects.equals(id, pessoa.id) && Objects.equals(nome, pessoa.nome) && Objects.equals(CPF, pessoa.CPF) && Objects.equals(email, pessoa.email) && Objects.equals(senha, pessoa.senha) && Objects.equals(perfis, pessoa.perfis) && Objects.equals(dataCriacao, pessoa.dataCriacao);
+        return Objects.equals(id, pessoa.id) && Objects.equals(nome, pessoa.nome)
+                && Objects.equals(cpf, pessoa.cpf) && Objects.equals(email, pessoa.email)
+                && Objects.equals(senha, pessoa.senha) && Objects.equals(perfis, pessoa.perfis)
+                && Objects.equals(dataCriacao, pessoa.dataCriacao);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, CPF, email, senha, perfis, dataCriacao);
+        return Objects.hash(id, nome, cpf, email, senha, perfis, dataCriacao);
     }
 }

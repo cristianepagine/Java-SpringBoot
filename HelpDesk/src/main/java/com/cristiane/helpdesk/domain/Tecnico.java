@@ -17,8 +17,8 @@ public class Tecnico extends Pessoa {
     @JsonIgnore
     private List<Chamado> chamados = new ArrayList<>();
 
-    public Tecnico(Integer id, String nome, String CPF, String email, String senha) {
-        super(id, nome, CPF, email, senha);
+    public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
+        super(id, nome, cpf, email, senha);
         addPerfil(Perfil.TECNICO);
     }
 
@@ -29,7 +29,7 @@ public class Tecnico extends Pessoa {
     public Tecnico(TecnicoDTO obj) {
         this.id = obj.getId();
         this.nome = obj.getNome();
-        this.CPF = obj.getCPF();
+        this.cpf = obj.getCpf();
         this.email = obj.getEmail();
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
