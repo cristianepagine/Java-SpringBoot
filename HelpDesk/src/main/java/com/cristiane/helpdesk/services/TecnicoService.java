@@ -43,6 +43,16 @@ public class TecnicoService {
         return tecnicoRepository.save(newObj);
     }
 
+    public Tecnico update(Integer id, TecnicoDTO objDTO) {
+        objDTO.setId(id);
+        //usa o findbyid para ver se existe e se nao existir lança a excessao que ja existe no findbyid
+        Tecnico oldObj = findById(id);
+        //chama a validação de cpf e email
+        validaPorCpfEEmail(objDTO);
+        oldObj = new Tecnico(objDTO);
+        return tecnicoRepository.save(oldObj);
+    }
+
     private void validaPorCpfEEmail(TecnicoDTO objDTO) {
         // Validar CPF
         Optional<Pessoa> objCpf = pessoaRepository.findBycpf(objDTO.getCpf());
@@ -56,6 +66,7 @@ public class TecnicoService {
             throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
         }
     }
+
 
 
 }
