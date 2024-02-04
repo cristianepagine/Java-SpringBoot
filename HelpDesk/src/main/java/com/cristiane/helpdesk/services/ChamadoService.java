@@ -36,6 +36,14 @@ public class ChamadoService {
     public Chamado create(ChamadoDTO obj) {
         return chamadoRepository.save(newChamado(obj));
     }
+    public Chamado update(Integer id, ChamadoDTO objDTO) {
+        //garante que o ID existe
+        objDTO.setId(id);
+        Chamado oldObj = findById(id);
+        //se existir recebe as informações atualizadas
+        oldObj = newChamado(objDTO);
+        return chamadoRepository.save(oldObj);
+    }
 
     public Chamado newChamado(ChamadoDTO obj) {
         Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
@@ -54,5 +62,6 @@ public class ChamadoService {
         chamado.setObservacoes(obj.getObservacoes());
         return chamado;
     }
+
 
 }

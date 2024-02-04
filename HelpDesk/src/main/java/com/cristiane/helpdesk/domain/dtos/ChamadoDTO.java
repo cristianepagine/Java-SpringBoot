@@ -33,7 +33,9 @@ public class ChamadoDTO implements Serializable {
     @NotNull(message = "O campo Cliente é necessário")
 
     private Integer cliente;
+
     private String nomeTecnico;
+
     private String nomeCliente;
 
     public ChamadoDTO() {
