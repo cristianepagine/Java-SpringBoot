@@ -39,7 +39,7 @@ public class TecnicoResource {
     public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO) {
         Tecnico newObj = tecnicoService.create(objDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
-        return ResponseEntity.created(null).build();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")

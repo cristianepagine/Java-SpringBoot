@@ -4,10 +4,10 @@ import com.cristiane.helpdesk.domain.enums.Prioridade;
 import com.cristiane.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.Objects;
+
 @Entity
 public class Chamado {
     @Id
