@@ -11,6 +11,7 @@ import com.cristiane.helpdesk.services.exceptions.ObjectnotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,12 @@ public class ChamadoService {
         Chamado chamado = new Chamado();
         if(obj.getId() != null) {
             chamado.setId(obj.getId());
+        }
+
+        //se status for 2 inclui data de fechamento no chamado
+        if(obj.getStatus().equals(2))
+        {
+            chamado.setDataFechamento(LocalDate.now());
         }
 
         chamado.setTecnico(tecnico);
